@@ -1,0 +1,132 @@
+输入了账号密码后,点击登录,触发验证码请求:
+curl 'https://jeniya.cn/api/go-captcha-data/slide-basic' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: zh' \
+  -H 'cache-control: no-store' \
+  -b 'session=MTc3ODMzMTU3MXxEWDhFQVFMX2dBQUJFQUVRQUFBRV80QUFBQT09fH9JLgn3fzihYFou10_YzQY0s_5PjAWv35moFss7Yh5m' \
+  -H 'new-api-user: -1' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://jeniya.cn/login' \
+  -H 'sec-ch-ua: "Chromium";v="148", "Microsoft Edge";v="148", "Not/A)Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0' \
+  -H 'x-forwarded-host: jeniya.cn'
+响应:
+{
+  "code": 0,
+  "captcha_key": "1778333080d150b521",
+  "image_base64": "/9j/2wCEAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBA.....",
+  "tile_x": 5,
+  "tile_y": 49,
+  "tile_width": 60,
+  "tile_height": 60,
+  "thumb_base64": "iVBORw0KGgoAA....."
+}
+
+滑动到错误位置,请求:
+curl 'https://jeniya.cn/api/go-captcha-check-data/slide-basic' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: zh' \
+  -H 'cache-control: no-store' \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundaryMAjpPturSqG8xZcH' \
+  -b 'session=MTc3ODMzMTU3MXxEWDhFQVFMX2dBQUJFQUVRQUFBRV80QUFBQT09fH9JLgn3fzihYFou10_YzQY0s_5PjAWv35moFss7Yh5m' \
+  -H 'new-api-user: -1' \
+  -H 'origin: https://jeniya.cn' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://jeniya.cn/login' \
+  -H 'sec-ch-ua: "Chromium";v="148", "Microsoft Edge";v="148", "Not/A)Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0' \
+  -H 'x-forwarded-host: jeniya.cn' \
+  --data-raw $'------WebKitFormBoundaryMAjpPturSqG8xZcH\r\nContent-Disposition: form-data; name="point"\r\n\r\n101,49\r\n------WebKitFormBoundaryMAjpPturSqG8xZcH\r\nContent-Disposition: form-data; name="key"\r\n\r\n1778333080d150b521\r\n------WebKitFormBoundaryMAjpPturSqG8xZcH--\r\n'
+
+响应:
+{"code":1,"message":"验证失败"}
+
+
+再次请求:
+curl 'https://jeniya.cn/api/go-captcha-data/slide-basic' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: zh' \
+  -H 'cache-control: no-store' \
+  -b 'session=MTc3ODMzMTU3MXxEWDhFQVFMX2dBQUJFQUVRQUFBRV80QUFBQT09fH9JLgn3fzihYFou10_YzQY0s_5PjAWv35moFss7Yh5m' \
+  -H 'new-api-user: -1' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://jeniya.cn/login' \
+  -H 'sec-ch-ua: "Chromium";v="148", "Microsoft Edge";v="148", "Not/A)Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0' \
+  -H 'x-forwarded-host: jeniya.cn'
+
+响应:
+{
+  "code": 0,
+  "captcha_key": "17783332095592121d",
+  "image_base64": "/9j/2wCEAAEBAQEBAQEMT4t....",
+  "tile_x": 5,
+  "tile_y": 100,
+  "tile_width": 42,
+  "tile_height": 42,
+  "thumb_base64": "iVBORw0KGgoAAAANSUhEUgA....."
+}
+滑动到正确位置,校验请求:
+curl 'https://jeniya.cn/api/go-captcha-check-data/slide-basic' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: zh' \
+  -H 'cache-control: no-store' \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundaryCaPDQv1XHG3OBKqv' \
+  -b 'session=MTc3ODMzMTU3MXxEWDhFQVFMX2dBQUJFQUVRQUFBRV80QUFBQT09fH9JLgn3fzihYFou10_YzQY0s_5PjAWv35moFss7Yh5m' \
+  -H 'new-api-user: -1' \
+  -H 'origin: https://jeniya.cn' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://jeniya.cn/login' \
+  -H 'sec-ch-ua: "Chromium";v="148", "Microsoft Edge";v="148", "Not/A)Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0' \
+  -H 'x-forwarded-host: jeniya.cn' \
+  --data-raw $'------WebKitFormBoundaryCaPDQv1XHG3OBKqv\r\nContent-Disposition: form-data; name="point"\r\n\r\n81,100\r\n------WebKitFormBoundaryCaPDQv1XHG3OBKqv\r\nContent-Disposition: form-data; name="key"\r\n\r\n17783332095592121d\r\n------WebKitFormBoundaryCaPDQv1XHG3OBKqv--\r\n'
+响应:
+{"code":0,"expires_at":1778333580,"token":"c72bae25-d6ec-42de-8f08-03b079803596"}
+
+触发登录请求:
+curl 'https://jeniya.cn/api/user/login?turnstile=' \
+  -H 'accept: application/json, text/plain, */*' \
+  -H 'accept-language: zh' \
+  -H 'cache-control: no-store' \
+  -H 'content-type: application/json' \
+  -b 'session=MTc3ODMzMTU3MXxEWDhFQVFMX2dBQUJFQUVRQUFBRV80QUFBQT09fH9JLgn3fzihYFou10_YzQY0s_5PjAWv35moFss7Yh5m' \
+  -H 'new-api-user: -1' \
+  -H 'origin: https://jeniya.cn' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://jeniya.cn/login' \
+  -H 'sec-ch-ua: "Chromium";v="148", "Microsoft Edge";v="148", "Not/A)Brand";v="99"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0' \
+  -H 'x-forwarded-host: jeniya.cn' \
+  --data-raw '{"username":"yang2yang","password":"YhXxlAdmin27","captcha_token":"c72bae25-d6ec-42de-8f08-03b079803596"}'
+
+响应:
+{"data":{"display_name":"yang2yang","group":"default","id":286137,"role":1,"status":1,"username":"yang2yang"},"message":"","success":true}
+
+有set-cookie:
+session=MTc3ODMzMzQwMnxEWDhFQVFMX2dBQUJFQUVRQUFEXy1fLUFBQWNHYzNSeWFXNW5EQVFBQW1sa0EybHVkQVFGQVAwSXUzSUdjM1J5YVc1bkRBb0FDSFZ6WlhKdVlXMWxCbk4wY21sdVp3d0xBQWw1WVc1bk1ubGhibWNHYzNSeWFXNW5EQVlBQkhKdmJHVURhVzUwQkFJQUFnWnpkSEpwYm1jTUNBQUdjM1JoZEhWekEybHVkQVFDQUFJR2MzUnlhVzVuREFjQUJXZHliM1Z3Qm5OMGNtbHVad3dKQUFka1pXWmhkV3gwQm5OMGNtbHVad3dTQUJCd1lYTnpkMjl5WkY5MlpYSnphVzl1QTJsdWRBUUNBQUFHYzNSeWFXNW5EQThBRFhObGMzTnBiMjVmZEc5clpXNEdjM1J5YVc1bkRDSUFJRFF4WkRnMk1XUmpNREEzTWpRMU1ETTVORGt3WXpFNU5ETmhaak01Tm1NNHxoO0vcmCqsCYZMBVzxu958kmokdvFecKaS1WuyeIapnA==; Path=/; Expires=Mon, 08 Jun 2026 13:30:02 GMT; Max-Age=2592000; Secure; SameSite=None
